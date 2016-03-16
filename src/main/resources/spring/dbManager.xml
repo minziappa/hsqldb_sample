@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<bean depends-on="dataSource"
+		class="org.springframework.beans.factory.config.MethodInvokingBean">
+		<property name="targetClass" value="org.hsqldb.util.DatabaseManagerSwing" />
+		<property name="targetMethod" value="main" />
+		<property name="arguments">
+			<list>
+				<value>--url</value>
+				<value>jdbc:derby:memory:dataSource</value>
+				<value>--user</value>
+				<value>sa</value>
+				<value>--password</value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>
