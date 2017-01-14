@@ -25,6 +25,12 @@ import io.sample.service.SampleService;
 @ContextConfiguration(locations = {"classpath:springConfig-test.xml"})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
+//@DbUnitConfiguration(databaseConnection="dataSource")
+//@TestExecutionListeners({
+//	  DependencyInjectionTestExecutionListener.class,
+//	  DirtiesContextTestExecutionListener.class,
+//	  TransactionDbUnitTestExecutionListener.class, //<-- needed if using transactions otherwise use TransactionalTestExecutionListener.class
+//	  })
 public class SampleServiceTest {
 
 	@Autowired
@@ -49,6 +55,14 @@ public class SampleServiceTest {
 	public void testRemove() throws Exception {
 		sampleService.remove(1);
 	}
+
+//	@Test
+//	@DatabaseSetup(value="/xml/sampleData.xml", type=DatabaseOperation.CLEAN_INSERT)
+//	@DatabaseTearDown(value="/xml/sampleData.xml", type=DatabaseOperation.DELETE_ALL)
+//	@Transactional
+//	public void test01() {
+//	    //some code
+//	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
